@@ -13,6 +13,7 @@ const articles = [
     { title: "The Amazon Rainforest", file: "amazon_rainforest.md" },
     { title: "The Internet", file: "the_internet.md" },
     { title: "Volcanology", file: "volcanology.md" },
+    { title: "The Human Brain", file: "the_human_brain.md" },
 ];
 
 // Populate sidebar with article links
