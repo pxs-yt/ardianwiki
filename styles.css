@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+    --bg-color: #1A1A1A;
+    --text-color: #FFFFFF;
+    --secondary-text-color: #808080;
+    --card-bg: #2D2D2D;
+    --card-hover-bg: #3D3D3D;
+    --header-bg: #1A1A1A;
+    --input-bg: #2D2D2D;
+    --input-border: #808080;
+    --sidebar-bg: #2D2D2D;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --frost-bg: rgba(45, 45, 45, 0.8);
+    --link-color: #FFFFFF;
+}
+
+body.light-mode {
+    --bg-color: #FAFAFA;
+    --text-color: #333333;
+    --secondary-text-color: #666666;
+    --card-bg: #FFFFFF;
+    --card-hover-bg: #F0F0F0;
+    --header-bg: #FFFFFF;
+    --input-bg: #FFFFFF;
+    --input-border: #CCCCCC;
+    --sidebar-bg: #F0F0F0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --frost-bg: rgba(255, 255, 255, 0.8);
+    --link-color: #333333;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: all 0.3s ease; /* Smooth transition for theme changes */
+}
+
+header {
+    background-color: var(--header-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 1000;
+    box-shadow: 0 2px 5px var(--shadow-color);
+}
+
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+}
+
+.logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
+    font-size: 24px;
+    margin-right: 10px;
+    color: var(--text-color);
+}
+
+.wiki-title {
+    font-size: 1.5em;
+    font-weight: 600;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+#search-input {
+    padding: 8px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 12px; /* Squircle corners */
+    color: var(--text-color);
+    font-size: 14px;
+    width: 150px;
+    transition: width 0.3s ease, border-color 0.3s ease;
+}
+
+#search-input:focus {
+    width: 200px;
+    outline: none;
+    border-color: var(--primary-color, #5DADE2); /* Optional highlight color */
+}
+
+.hamburger, .close-sidebar, .theme-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.container {
+    margin-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -100%; /* Hidden off-screen by default on all screen sizes */
+    width: 250px;
+    height: 100%;
+    background-color: var(--sidebar-bg);
+    padding: 15px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+    backdrop-filter: blur(10px); /* Frost effect */
+    background: var(--frost-bg); /* Frost effect fallback */
+}
+
+.sidebar.open {
+    left: 0; /* Slides in when 'open' class is added */
+}
+
+.close-sidebar {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.sidebar h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: var(--text-color);
+}
+
+.sidebar a {
+    display: block;
+    color: var(--link-color);
+    text-decoration: none;
+    padding: 8px 0;
+    margin-bottom: 5px;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+    color: var(--primary-color, #5DADE2);
+}
+
+.main-content {
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#article-content h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+#article-content p {
+    font-size: 16px;
+    color: var(--secondary-text-color);
+}
+
+/* Search Results Styling */
+.search-results {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.search-results h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.search-results .result {
+    background: var(--frost-bg); /* Frost effect */
+    backdrop-filter: blur(10px); /* Frost effect */
+    border-radius: 12px; /* Squircle corners */
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 20px var(--shadow-color); /* Enhanced drop shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-results .result:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px var(--shadow-color);
+}
+
+.search-results .result a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.search-results .result p {
+    color: var(--secondary-text-color);
+    font-size: 16px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 767px) {
+    .search-results {
+        padding: 0 10px;
+    }
+
+    .search-results .result {
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+
+    .search-results .result a {
+        font-size: 18px;
+    }
+
+    .search-results .result p {
+        font-size: 14px;
+    }
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+    }
+
+    header {
+        padding: 10px 20px;
+    }
+
+    .main-content {
+        margin-left: 0; /* No default margin since sidebar is hidden */
+        padding: 30px;
+    }
+
+    #article-content h1 {
+        font-size: 32px;
+    }
+
+    #article-content p {
+        font-size: 18px;
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger on desktop too */
+    }
+
+    .search-results {
+        padding: 0 30px;
+    }
+
+    .search-results .result {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
