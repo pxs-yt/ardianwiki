@@ -40,6 +40,8 @@ const articles = [
     { title: "Bill Gates", category: "Personalities", file: "Bill_Gates.md" },
     { title: "Tim Cook", category: "Personalities", file: "Tim_Cook.md" },
     { title: "Steve Jobs", category: "Personalities", file: "Steve_Jobs.md" },
+    { title: "Tim Sweeney", category: "Personalities", file: "Tim_Sweeney.md" },
+    { title: "Satya Nadella", category: "Personalities", file: "Satya_Nadella.md" },
 
     { title: "Microsoft", category: "Tech Companies", file: "Microsoft.md" },
 ];
