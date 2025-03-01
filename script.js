@@ -143,7 +143,14 @@ sidebar.addEventListener('click', (event) => {
 const themeToggle = document.querySelector('.theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 
-themeToggle.addEventListener('click', () => {
+// Handle both click and touch events for mobile compatibility
+themeToggle.addEventListener('click', toggleTheme);
+themeToggle.addEventListener('touchend', toggleTheme, { passive: true }); // Touch event for mobile
+
+function toggleTheme(event) {
+    // Prevent default if needed (e.g., for touch events)
+    event.preventDefault();
+    
     const currentTheme = document.body.className || 'dark-mode'; // Default to dark-mode if no class
     let newTheme;
 
@@ -164,7 +171,7 @@ themeToggle.addEventListener('click', () => {
 
     document.body.className = newTheme; // Set the new theme class
     localStorage.setItem('theme', newTheme); // Store theme
-});
+}
 
 // Load saved theme or default to dark mode
 const savedTheme = localStorage.getItem('theme') || 'dark-mode';
@@ -176,4 +183,17 @@ if (savedTheme === 'light-mode') {
     themeIcon.className = 'fas fa-leaf';
 } else {
     themeIcon.className = 'fas fa-sun'; // Default to dark mode
+}
+
+// Ensure localStorage is accessible (optional fallback for mobile)
+try {
+    localStorage.setItem('test', 'test');
+    localStorage.removeItem('test');
+} catch (e) {
+    console.warn('localStorage is not available, themes may not persist.');
+    // Fallback: Default to dark mode if localStorage fails
+    if (!savedTheme) {
+        document.body.className = 'dark-mode';
+        themeIcon.className = 'fas fa-sun';
+    }
 }
