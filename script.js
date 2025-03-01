@@ -132,33 +132,37 @@ const themeToggle = document.querySelector('.theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 
 themeToggle.addEventListener('click', () => {
-    const currentTheme = document.body.className;
+    const currentTheme = document.body.className || 'dark-mode'; // Default to dark-mode if no class
     let newTheme;
 
-    if (currentTheme === '') {
-        newTheme = 'light-mode';
-        themeIcon.className = 'fas fa-moon'; // Moon for light mode
-    } else if (currentTheme === 'light-mode') {
-        newTheme = 'paper-mode';
-        themeIcon.className = 'fas fa-leaf'; // Leaf for paper mode
-    } else if (currentTheme === 'paper-mode') {
-        newTheme = '';
-        themeIcon.className = 'fas fa-sun'; // Sun for dark mode
+    switch (currentTheme) {
+        case '':
+        case 'dark-mode':
+            newTheme = 'light-mode';
+            themeIcon.className = 'fas fa-moon'; // Moon for light mode
+            break;
+        case 'light-mode':
+            newTheme = 'paper-mode';
+            themeIcon.className = 'fas fa-leaf'; // Leaf for paper mode
+            break;
+        case 'paper-mode':
+            newTheme = '';
+            themeIcon.className = 'fas fa-sun'; // Sun for dark mode
+            break;
     }
 
-    document.body.className = newTheme;
-    localStorage.setItem('theme', newTheme);
+    document.body.className = newTheme; // Set the new theme class
+    localStorage.setItem('theme', newTheme || 'dark-mode'); // Store theme, default to dark-mode
 });
 
 // Load saved theme or default to dark mode
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    document.body.className = savedTheme;
-    if (savedTheme === 'light-mode') {
-        themeIcon.className = 'fas fa-moon';
-    } else if (savedTheme === 'paper-mode') {
-        themeIcon.className = 'fas fa-leaf';
-    }
+const savedTheme = localStorage.getItem('theme') || 'dark-mode';
+document.body.className = savedTheme;
+
+if (savedTheme === 'light-mode') {
+    themeIcon.className = 'fas fa-moon';
+} else if (savedTheme === 'paper-mode') {
+    themeIcon.className = 'fas fa-leaf';
 } else {
-    themeIcon.className = 'fas fa-sun'; // Default to dark mode
+    themeIcon.className = 'fas fa-sun'; // Default to dark mode (no class or 'dark-mode')
 }
