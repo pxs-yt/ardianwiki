@@ -88,17 +88,17 @@ function loadArticle() {
 
 // Search functionality with subcategory support
 document.getElementById('search-input').addEventListener('input', () => {
-    const query = document.getElementById('search-input').value.toLowerCase().trim();
+    const query = document.getElementById('search-input').value.trim().toLowerCase();
     let results;
 
     // Handle special subcategory searches
-    if (query === '*SUBCATEGORIES*') {
+    if (query === '*subcategories*') { // Case-insensitive match
         results = Object.keys(categories).map(category => ({
             category,
             articles: categories[category]
         }));
         displaySubcategoryResults(results, false); // Only show subcategories
-    } else if (query === '*SUBCATEGORIES:ARTICLES*') {
+    } else if (query === '*subcategories:articles*') { // Case-insensitive match
         results = Object.keys(categories).map(category => ({
             category,
             articles: categories[category]
@@ -119,7 +119,7 @@ function displaySearchResults(results) {
             ${results.map(article => `
                 <div class="result">
                     <a href="#${article.file.replace('.md', '')}">${article.title}</a>
-                    <p>${article.snippet}</p>
+                    <p>${article.snippet || 'No description available.'}</p>
                 </div>
             `).join('')}
         `;
