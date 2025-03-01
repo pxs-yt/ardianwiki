@@ -25,9 +25,14 @@ const articles = [
     { title: "The Human Brain", category: "Biology", file: "the_human_brain.md" },
 
     { title: "Albania", category: "Countries", file: "Albania.md" },
+    { title: "Italy", category: "Countries", file: "Italy.md" },
     
     { title: "Edi Rama", category: "Politicians", file: "Edi_Rama.md" },
     { title: "Donald Trump", category: "Politicians", file: "Donald_Trump.md" },
+    { title: "Joe Biden", category: "Politicians", file: "Joe_Biden.md" },
+    { title: "JD Vance", category: "Politicians", file: "JD_Vance.md" },
+
+    { title: "Elon Musk", category: "Personalities", file: "Elon_Musk.md" },
 ];
 
 // Populate sidebar with collapsible subcategories and articles
