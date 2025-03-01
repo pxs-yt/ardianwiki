@@ -14,6 +14,8 @@ const articles = [
     { title: "The Internet", file: "the_internet.md" },
     { title: "Volcanology", file: "volcanology.md" },
     { title: "The Human Brain", file: "the_human_brain.md" },
+    { title: "The Periodic Table", file: "the_periodic_table.md.md" },
+    { title: "Oceanography", file: "oceanography.md" },
 ];
 
 // Populate sidebar with article links
