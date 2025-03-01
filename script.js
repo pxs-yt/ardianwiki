@@ -82,7 +82,7 @@ for (const category in categories) {
     });
 }
 
-// Load article based on hash
+// Load article based on hash and display totals on home screen
 window.addEventListener('hashchange', loadArticle);
 window.addEventListener('load', loadArticle);
 
@@ -101,7 +101,13 @@ function loadArticle() {
                 });
         }
     } else {
-        document.getElementById('article-content').innerHTML = '<h1>Welcome to ArdianWiki</h1><p>Select an article from the sidebar or use the search bar to find articles.</p>';
+        const totalArticles = articles.length;
+        const totalSubcategories = Object.keys(categories).length;
+        document.getElementById('article-content').innerHTML = `
+            <h1>Welcome to ArdianWiki</h1>
+            <p>Select an article from the sidebar or use the search bar to find articles.</p>
+            <p>Total Articles: ${totalArticles} | Total Subcategories: ${totalSubcategories}</p>
+        `;
     }
 }
 
@@ -247,6 +253,7 @@ if (savedTheme === 'light-mode') {
     themeIcon.className = 'fas fa-sun'; // Default to dark mode
 }
 
+// Ensure localStorage is accessible (optional fallback for mobile)
 try {
     localStorage.setItem('test', 'test');
     localStorage.removeItem('test');

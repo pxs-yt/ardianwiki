@@ -223,6 +223,17 @@ header {
     color: var(--secondary-text-color);
 }
 
+.home-stats {
+    margin-top: 15px;
+    padding: 15px;
+    background: var(--frost-bg); /* Frost effect */
+    backdrop-filter: blur(10px); /* Frost effect */
+    border-radius: 12px; /* Squircle corners */
+    box-shadow: 0 4px 10px var(--shadow-color);
+    color: var(--text-color);
+    font-size: 16px;
+}
+
 /* Search Results Styling */
 .search-results {
     margin-top: 20px;
@@ -265,93 +276,6 @@ header {
     font-size: 16px;
     margin: 0;
     line-height: 1.5;
-}
-
-/* Responsive adjustments for mobile */
-@media (max-width: 767px) {
-    .search-results {
-        padding: 0 10px;
-    }
-
-    .search-results .result {
-        padding: 15px;
-        margin-bottom: 10px;
-    }
-
-    .search-results .result a {
-        font-size: 18px;
-    }
-
-    .search-results .result p {
-        font-size: 14px;
-    }
-
-    /* Mobile-specific header adjustments */
-    header {
-        padding: 6px 8px; /* Further reduced padding */
-    }
-
-    .logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
-        font-size: 16px; /* Further reduced icon size */
-        margin-right: 3px; /* Further reduced margin */
-    }
-
-    .wiki-title {
-        font-size: 1em; /* Further reduced font size */
-    }
-
-    #search-input {
-        padding: 4px; /* Further reduced padding */
-        width: 100px; /* Further reduced width */
-    }
-
-    #search-input:focus {
-        width: 120px; /* Further reduced focus width */
-    }
-}
-
-/* Desktop-specific adjustments */
-@media (min-width: 768px) {
-    .container {
-        flex-direction: row;
-    }
-
-    header {
-        padding: 10px 20px;
-    }
-
-    .main-content {
-        margin-left: 0; /* No default margin since sidebar is hidden */
-        padding: 30px;
-    }
-
-    #article-content h1 {
-        font-size: 32px;
-    }
-
-    #article-content p {
-        font-size: 18px;
-    }
-
-    .hamburger {
-        display: block; /* Show hamburger on desktop too */
-    }
-
-    .search-results {
-        padding: 0 30px;
-    }
-
-    .search-results .result {
-        max-width: 500px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Ensure sidebar is scrollable on desktop too */
-    .sidebar {
-        height: calc(100vh - 60px); /* Adjust for header height */
-        overflow-y: auto; /* Enable scrolling on desktop */
-    }
 }
 
 /* Subcategory Search Results Styling */
@@ -414,33 +338,98 @@ header {
 
 /* Responsive adjustments for mobile */
 @media (max-width: 767px) {
-    .subcategory-results {
+    .search-results, .subcategory-results {
         padding: 0 10px;
     }
 
-    .subcategory-results .category-item {
+    .search-results .result, .subcategory-results .category-item {
         padding: 12px;
         margin-bottom: 10px;
     }
 
-    .subcategory-results .category-item h3 {
-        font-size: 16px;
+    .search-results .result a, .subcategory-results .category-item h3 {
+        font-size: 18px;
     }
 
-    .subcategory-results .category-item a {
+    .search-results .result p, .subcategory-results .category-item a {
         font-size: 14px;
+    }
+
+    .home-stats {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    /* Mobile-specific header adjustments */
+    header {
+        padding: 6px 8px; /* Further reduced padding */
+    }
+
+    .logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
+        font-size: 16px; /* Further reduced icon size */
+        margin-right: 3px; /* Further reduced margin */
+    }
+
+    .wiki-title {
+        font-size: 1em; /* Further reduced font size */
+    }
+
+    #search-input {
+        padding: 4px; /* Further reduced padding */
+        width: 100px; /* Further reduced width */
+    }
+
+    #search-input:focus {
+        width: 120px; /* Further reduced focus width */
     }
 }
 
 /* Desktop-specific adjustments */
 @media (min-width: 768px) {
-    .subcategory-results {
+    .container {
+        flex-direction: row;
+    }
+
+    header {
+        padding: 10px 20px;
+    }
+
+    .main-content {
+        margin-left: 0; /* No default margin since sidebar is hidden */
+        padding: 30px;
+    }
+
+    #article-content h1 {
+        font-size: 32px;
+    }
+
+    #article-content p {
+        font-size: 18px;
+    }
+
+    .hamburger {
+        display: block; /* Show hamburger on desktop too */
+    }
+
+    .search-results, .subcategory-results {
         padding: 0 30px;
     }
 
-    .subcategory-results .category-item {
+    .search-results .result, .subcategory-results .category-item {
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .home-stats {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Ensure sidebar is scrollable on desktop too */
+    .sidebar {
+        height: calc(100vh - 60px); /* Adjust for header height */
+        overflow-y: auto; /* Enable scrolling on desktop */
     }
 }
