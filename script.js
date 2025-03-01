@@ -18,14 +18,37 @@ const articles = [
     { title: "Oceanography", file: "oceanography.md" },
 ];
 
-// Populate sidebar with article links
+// Populate sidebar with subcategories and articles
 const sidebar = document.querySelector('.sidebar');
+const categories = {};
+
 articles.forEach(article => {
-    const link = document.createElement('a');
-    link.href = `#${article.file.replace('.md', '')}`;
-    link.textContent = article.title;
-    sidebar.appendChild(link);
+    if (!categories[article.category]) {
+        categories[article.category] = [];
+    }
+    categories[article.category].push(article);
 });
+
+for (const category in categories) {
+    const categoryDiv = document.createElement('div');
+    categoryDiv.className = 'category';
+    
+    const categoryHeader = document.createElement('h4');
+    categoryHeader.textContent = category;
+    categoryDiv.appendChild(categoryHeader);
+
+    const ul = document.createElement('ul');
+    categories[category].forEach(article => {
+        const li = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `#${article.file.replace('.md', '')}`;
+        link.textContent = article.title;
+        li.appendChild(link);
+        ul.appendChild(li);
+    });
+    categoryDiv.appendChild(ul);
+    sidebar.appendChild(categoryDiv);
+}
 
 // Load article based on hash
 window.addEventListener('hashchange', loadArticle);
@@ -104,21 +127,38 @@ sidebar.addEventListener('click', (event) => {
     event.stopPropagation();
 });
 
-// Light/Dark Mode Toggle
+// Light/Dark/Paper Mode Toggle
 const themeToggle = document.querySelector('.theme-toggle');
+const themeIcon = document.getElementById('theme-icon');
 
 themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    const isLightMode = document.body.classList.contains('light-mode');
-    themeToggle.querySelector('i').classList.toggle('fa-sun', !isLightMode);
-    themeToggle.querySelector('i').classList.toggle('fa-moon', isLightMode);
-    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+    const currentTheme = document.body.className;
+    let newTheme;
+
+    if (currentTheme === '') {
+        newTheme = 'light-mode';
+        themeIcon.className = 'fas fa-moon'; // Moon for light mode
+    } else if (currentTheme === 'light-mode') {
+        newTheme = 'paper-mode';
+        themeIcon.className = 'fas fa-leaf'; // Leaf for paper mode
+    } else if (currentTheme === 'paper-mode') {
+        newTheme = '';
+        themeIcon.className = 'fas fa-sun'; // Sun for dark mode
+    }
+
+    document.body.className = newTheme;
+    localStorage.setItem('theme', newTheme);
 });
 
 // Load saved theme or default to dark mode
 const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'light') {
-    document.body.classList.add('light-mode');
-    themeToggle.querySelector('i').classList.remove('fa-sun');
-    themeToggle.querySelector('i').classList.add('fa-moon');
+if (savedTheme) {
+    document.body.className = savedTheme;
+    if (savedTheme === 'light-mode') {
+        themeIcon.className = 'fas fa-moon';
+    } else if (savedTheme === 'paper-mode') {
+        themeIcon.className = 'fas fa-leaf';
+    }
+} else {
+    themeIcon.className = 'fas fa-sun'; // Default to dark mode
 }

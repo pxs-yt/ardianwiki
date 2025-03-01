@@ -30,6 +30,21 @@ body.light-mode {
     --link-color: #333333;
 }
 
+body.paper-mode {
+    --bg-color: #F5E8C7; /* Light brown paper-like background */
+    --text-color: #4A2C2A; /* Dark brown text for contrast */
+    --secondary-text-color: #7A5D3A; /* Muted brown for secondary text */
+    --card-bg: #EADBA7; /* Slightly darker paper tone for cards */
+    --card-hover-bg: #D9C79F; /* Even darker on hover */
+    --header-bg: #EADBA7; /* Paper-like header */
+    --input-bg: #EADBA7; /* Paper-like input */
+    --input-border: #7A5D3A; /* Brown border */
+    --sidebar-bg: #EADBA7; /* Paper-like sidebar */
+    --shadow-color: rgba(74, 44, 42, 0.2); /* Subtle brown shadow */
+    --frost-bg: rgba(234, 219, 167, 0.8); /* Paper-like frost effect */
+    --link-color: #4A2C2A; /* Dark brown links */
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
@@ -132,15 +147,36 @@ header {
     color: var(--text-color);
 }
 
-.sidebar a {
-    display: block;
-    color: var(--link-color);
-    text-decoration: none;
-    padding: 8px 0;
+/* Subcategories in Sidebar */
+.sidebar .category {
+    margin-bottom: 15px;
+}
+
+.sidebar .category h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    color: var(--text-color);
+}
+
+.sidebar .category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar .category li {
     margin-bottom: 5px;
 }
 
-.sidebar a:hover {
+.sidebar .category a {
+    display: block;
+    color: var(--link-color);
+    text-decoration: none;
+    padding: 5px 0;
+}
+
+.sidebar .category a:hover {
     text-decoration: underline;
     color: var(--primary-color, #5DADE2);
 }
