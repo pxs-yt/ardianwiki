@@ -85,11 +85,29 @@ function loadArticle() {
     }
 }
 
-// Search functionality
+// Search functionality with subcategory support
 document.getElementById('search-input').addEventListener('input', () => {
-    const query = document.getElementById('search-input').value.toLowerCase();
-    const filteredArticles = articles.filter(article => article.title.toLowerCase().includes(query));
-    displaySearchResults(filteredArticles);
+    const query = document.getElementById('search-input').value.toLowerCase().trim();
+    let results;
+
+    // Handle special subcategory searches
+    if (query === '*SUBCATEGORIES*') {
+        results = Object.keys(categories).map(category => ({
+            category,
+            articles: categories[category]
+        }));
+        displaySubcategoryResults(results, false); // Only show subcategories
+    } else if (query === '*SUBCATEGORIES:ARTICLES*') {
+        results = Object.keys(categories).map(category => ({
+            category,
+            articles: categories[category]
+        }));
+        displaySubcategoryResults(results, true); // Show subcategories with articles
+    } else {
+        // Regular article search by title
+        results = articles.filter(article => article.title.toLowerCase().includes(query));
+        displaySearchResults(results);
+    }
 });
 
 function displaySearchResults(results) {
@@ -107,6 +125,30 @@ function displaySearchResults(results) {
         articleContent.innerHTML = html;
     } else {
         articleContent.innerHTML = '<p>No articles found.</p>';
+    }
+}
+
+function displaySubcategoryResults(results, includeArticles) {
+    const articleContent = document.getElementById('article-content');
+    if (results.length > 0) {
+        const html = `
+            <h2>Subcategory Results</h2>
+            ${results.map(item => `
+                <div class="category-item">
+                    <h3>${item.category}</h3>
+                    ${includeArticles ? `
+                        <ul>
+                            ${item.articles.map(article => `
+                                <li><a href="#${article.file.replace('.md', '')}">${article.title}</a></li>
+                            `).join('')}
+                        </ul>
+                    ` : ''}
+                </div>
+            `).join('')}
+        `;
+        articleContent.innerHTML = html;
+    } else {
+        articleContent.innerHTML = '<p>No subcategories found.</p>';
     }
 }
 

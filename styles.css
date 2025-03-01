@@ -353,3 +353,94 @@ header {
         overflow-y: auto; /* Enable scrolling on desktop */
     }
 }
+
+/* Subcategory Search Results Styling */
+.subcategory-results {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.subcategory-results h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.subcategory-results .category-item {
+    background: var(--frost-bg); /* Frost effect */
+    backdrop-filter: blur(10px); /* Frost effect */
+    border-radius: 12px; /* Squircle corners */
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 8px 20px var(--shadow-color); /* Enhanced drop shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.subcategory-results .category-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px var(--shadow-color);
+}
+
+.subcategory-results .category-item h3 {
+    color: var(--text-color);
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 10px;
+    text-decoration: none;
+}
+
+.subcategory-results .category-item ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.subcategory-results .category-item li {
+    margin-bottom: 8px;
+}
+
+.subcategory-results .category-item a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+.subcategory-results .category-item a:hover {
+    text-decoration: underline;
+    color: var(--primary-color, #5DADE2);
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 767px) {
+    .subcategory-results {
+        padding: 0 10px;
+    }
+
+    .subcategory-results .category-item {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+
+    .subcategory-results .category-item h3 {
+        font-size: 16px;
+    }
+
+    .subcategory-results .category-item a {
+        font-size: 14px;
+    }
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 768px) {
+    .subcategory-results {
+        padding: 0 30px;
+    }
+
+    .subcategory-results .category-item {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
