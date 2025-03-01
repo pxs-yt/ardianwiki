@@ -1,21 +1,20 @@
 const articles = [
-    { title: "Artificial Intelligence", file: "artificial_intelligence.md" },
-    { title: "Climate Change", file: "climate_change.md" },
-    { title: "Famous Scientists", file: "famous_scientists.md" },
-    { title: "Healthy Eating", file: "healthy_eating.md" },
-    { title: "Internet History", file: "internet_history.md" },
-    { title: "Introduction", file: "introduction.md" },
-    { title: "Programming Languages", file: "programming_languages.md" },
-    { title: "Renewable Energy", file: "renewable_energy.md" },
-    { title: "Solar System", file: "solar_system.md" },
-    { title: "World War II", file: "world_war_ii.md" },
-    { title: "Quantum Mechanics", file: "quantum_mechanics.md" },
-    { title: "The Amazon Rainforest", file: "amazon_rainforest.md" },
-    { title: "The Internet", file: "the_internet.md" },
-    { title: "Volcanology", file: "volcanology.md" },
-    { title: "The Human Brain", file: "the_human_brain.md" },
-    { title: "The Periodic Table", file: "the_periodic_table.md" },
-    { title: "Oceanography", file: "oceanography.md" },
+    { title: "Artificial Intelligence", category: "Artificial Intelligence", file: "artificial_intelligence.md" },
+    { title: "Climate Change", category: "Nature", file: "climate_change.md" },
+    { title: "Famous Scientists", category: "Science", file: "famous_scientists.md" },
+    { title: "Healthy Eating", category: "Wellbeing", file: "healthy_eating.md" },
+    { title: "Introduction", category: "Introduction", file: "introduction.md" },
+    { title: "Programming Languages", category: "Technology", file: "programming_languages.md" },
+    { title: "Renewable Energy", category: "Science", file: "renewable_energy.md" },
+    { title: "Solar System", category: "Space", file: "solar_system.md" },
+    { title: "World War II", category: "War", file: "world_war_ii.md" },
+    { title: "Quantum Mechanics", category: "Technology", file: "quantum_mechanics.md" },
+    { title: "The Amazon Rainforest", category: "Nature", file: "amazon_rainforest.md" },
+    { title: "The Internet", category: "Technology", file: "the_internet.md" },
+    { title: "Volcanology", category: "Nature", file: "volcanology.md" },
+    { title: "The Human Brain", category: "Biology", file: "the_human_brain.md" },
+    { title: "The Periodic Table", category: "Science", file: "the_periodic_table.md" },
+    { title: "Oceanography", category: "Nature", file: "oceanography.md" },
 ];
 
 // Populate sidebar with subcategories and articles
@@ -136,7 +135,6 @@ themeToggle.addEventListener('click', () => {
     let newTheme;
 
     switch (currentTheme) {
-        case '':
         case 'dark-mode':
             newTheme = 'light-mode';
             themeIcon.className = 'fas fa-moon'; // Moon for light mode
@@ -146,13 +144,13 @@ themeToggle.addEventListener('click', () => {
             themeIcon.className = 'fas fa-leaf'; // Leaf for paper mode
             break;
         case 'paper-mode':
-            newTheme = '';
+            newTheme = 'dark-mode';
             themeIcon.className = 'fas fa-sun'; // Sun for dark mode
             break;
     }
 
     document.body.className = newTheme; // Set the new theme class
-    localStorage.setItem('theme', newTheme || 'dark-mode'); // Store theme, default to dark-mode
+    localStorage.setItem('theme', newTheme); // Store theme
 });
 
 // Load saved theme or default to dark mode
@@ -164,5 +162,5 @@ if (savedTheme === 'light-mode') {
 } else if (savedTheme === 'paper-mode') {
     themeIcon.className = 'fas fa-leaf';
 } else {
-    themeIcon.className = 'fas fa-sun'; // Default to dark mode (no class or 'dark-mode')
+    themeIcon.className = 'fas fa-sun'; // Default to dark mode
 }
