@@ -11,6 +11,8 @@ const articles = [
     { title: "World War II", file: "world_war_ii.md" },
     { title: "Quantum Mechanics", file: "quantum_mechanics.md" },
     { title: "The Amazon Rainforest", file: "amazon_rainforest.md" },
+    { title: "The Internet", file: "the_internet.md" },
+    { title: "Volcanology", file: "volcanology.md" },
 ];
 
 // Populate sidebar with article links
