@@ -26,6 +26,9 @@ const articles = [
 
     { title: "Albania", category: "Countries", file: "Albania.md" },
     { title: "Italy", category: "Countries", file: "Italy.md" },
+    { title: "Japan", category: "Countries", file: "Japan.md" },
+    { title: "South Korea", category: "Countries", file: "South_Korea.md" },
+    { title: "United States of America (USA)", category: "Countries", file: "United_States_of_America.md" },
     
     { title: "Edi Rama", category: "Politicians", file: "Edi_Rama.md" },
     { title: "Donald Trump", category: "Politicians", file: "Donald_Trump.md" },
@@ -33,6 +36,7 @@ const articles = [
     { title: "JD Vance", category: "Politicians", file: "JD_Vance.md" },
 
     { title: "Elon Musk", category: "Personalities", file: "Elon_Musk.md" },
+    { title: "Bill Gates", category: "Personalities", file: "Bill_Gates.md" },
 ];
 
 // Populate sidebar with collapsible subcategories and articles
