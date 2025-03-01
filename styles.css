@@ -44,7 +44,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 8px 10px; /* Reduced padding for mobile */
     position: fixed;
     top: 0;
     width: 100%;
@@ -59,31 +59,31 @@ header {
 }
 
 .logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
-    font-size: 24px;
-    margin-right: 10px;
+    font-size: 18px; /* Reduced icon size for mobile */
+    margin-right: 5px; /* Reduced margin for mobile */
     color: var(--text-color);
 }
 
 .wiki-title {
-    font-size: 1.5em;
+    font-size: 1.2em; /* Reduced font size for mobile */
     font-weight: 600;
     color: var(--text-color);
     text-decoration: none;
 }
 
 #search-input {
-    padding: 8px;
+    padding: 6px; /* Reduced padding for mobile */
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
     border-radius: 12px; /* Squircle corners */
     color: var(--text-color);
-    font-size: 14px;
-    width: 150px;
+    font-size: 12px; /* Reduced font size for mobile */
+    width: 120px; /* Reduced width for mobile */
     transition: width 0.3s ease, border-color 0.3s ease;
 }
 
 #search-input:focus {
-    width: 200px;
+    width: 150px; /* Reduced focus width for mobile */
     outline: none;
     border-color: var(--primary-color, #5DADE2); /* Optional highlight color */
 }
@@ -223,6 +223,29 @@ header {
 
     .search-results .result p {
         font-size: 14px;
+    }
+
+    /* Mobile-specific header adjustments */
+    header {
+        padding: 6px 8px; /* Further reduced padding */
+    }
+
+    .logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
+        font-size: 16px; /* Further reduced icon size */
+        margin-right: 3px; /* Further reduced margin */
+    }
+
+    .wiki-title {
+        font-size: 1em; /* Further reduced font size */
+    }
+
+    #search-input {
+        padding: 4px; /* Further reduced padding */
+        width: 100px; /* Further reduced width */
+    }
+
+    #search-input:focus {
+        width: 120px; /* Further reduced focus width */
     }
 }
 
