@@ -228,7 +228,6 @@ if (savedTheme === 'light-mode') {
     themeIcon.className = 'fas fa-sun'; // Default to dark mode
 }
 
-// Ensure localStorage is accessible (optional fallback for mobile)
 try {
     localStorage.setItem('test', 'test');
     localStorage.removeItem('test');
