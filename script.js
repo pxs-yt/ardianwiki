@@ -8,7 +8,9 @@ const articles = [
     { title: "Programming Languages", file: "programming_languages.md" },
     { title: "Renewable Energy", file: "renewable_energy.md" },
     { title: "Solar System", file: "solar_system.md" },
-    { title: "World War II", file: "world_war_ii.md" }
+    { title: "World War II", file: "world_war_ii.md" },
+    { title: "Quantum Mechanics", file: "quantum_mechanics.md" },
+    { title: "The Amazon Rainforest", file: "amazon_rainforest.md" },
 ];
 
 // Populate sidebar with article links
