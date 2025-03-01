@@ -147,16 +147,40 @@ header {
     color: var(--text-color);
 }
 
-/* Subcategories in Sidebar */
+/* Collapsible Subcategories in Sidebar */
 .sidebar .category {
     margin-bottom: 15px;
 }
 
-.sidebar .category h4 {
+.sidebar .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 16px;
     font-weight: 600;
     margin: 0 0 8px;
     color: var(--text-color);
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.sidebar .category-header i {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar .category-header.expanded i {
+    transform: rotate(180deg); /* Point down when expanded */
+}
+
+.sidebar .category-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.sidebar .category-content.expanded {
+    max-height: 200px; /* Adjust based on content height */
 }
 
 .sidebar .category ul {

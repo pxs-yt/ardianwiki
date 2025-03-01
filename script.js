@@ -1,23 +1,25 @@
 const articles = [
-    { title: "Artificial Intelligence", category: "Artificial Intelligence", file: "artificial_intelligence.md" },
-    { title: "Climate Change", category: "Nature", file: "climate_change.md" },
-    { title: "Famous Scientists", category: "Science", file: "famous_scientists.md" },
-    { title: "Healthy Eating", category: "Wellbeing", file: "healthy_eating.md" },
     { title: "Introduction", category: "Introduction", file: "introduction.md" },
+    { title: "Artificial Intelligence", category: "Artificial Intelligence", file: "artificial_intelligence.md" },
     { title: "Programming Languages", category: "Technology", file: "programming_languages.md" },
+    { title: "Quantum Mechanics", category: "Technology", file: "quantum_mechanics.md" },
+    { title: "The Internet", category: "Technology", file: "the_internet.md" },
+    { title: "Famous Scientists", category: "Science", file: "famous_scientists.md" },
     { title: "Renewable Energy", category: "Science", file: "renewable_energy.md" },
+    { title: "The Periodic Table", category: "Science", file: "the_periodic_table.md" },
+    { title: "Climate Change", category: "Nature", file: "climate_change.md" },
+    { title: "The Amazon Rainforest", category: "Nature", file: "amazon_rainforest.md" },
+    { title: "Volcanology", category: "Nature", file: "volcanology.md" },
+    { title: "Oceanography", category: "Nature", file: "oceanography.md" },
+    { title: "Healthy Eating", category: "Wellbeing", file: "healthy_eating.md" },
     { title: "Solar System", category: "Space", file: "solar_system.md" },
     { title: "World War II", category: "War", file: "world_war_ii.md" },
-    { title: "Quantum Mechanics", category: "Technology", file: "quantum_mechanics.md" },
-    { title: "The Amazon Rainforest", category: "Nature", file: "amazon_rainforest.md" },
-    { title: "The Internet", category: "Technology", file: "the_internet.md" },
-    { title: "Volcanology", category: "Nature", file: "volcanology.md" },
     { title: "The Human Brain", category: "Biology", file: "the_human_brain.md" },
-    { title: "The Periodic Table", category: "Science", file: "the_periodic_table.md" },
-    { title: "Oceanography", category: "Nature", file: "oceanography.md" },
+    
+    
 ];
 
-// Populate sidebar with subcategories and articles
+// Populate sidebar with collapsible subcategories and articles
 const sidebar = document.querySelector('.sidebar');
 const categories = {};
 
@@ -31,10 +33,14 @@ articles.forEach(article => {
 for (const category in categories) {
     const categoryDiv = document.createElement('div');
     categoryDiv.className = 'category';
-    
-    const categoryHeader = document.createElement('h4');
-    categoryHeader.textContent = category;
+
+    const categoryHeader = document.createElement('div');
+    categoryHeader.className = 'category-header';
+    categoryHeader.innerHTML = `<h4>${category}</h4><i class="fas fa-chevron-down"></i>`;
     categoryDiv.appendChild(categoryHeader);
+
+    const categoryContent = document.createElement('div');
+    categoryContent.className = 'category-content';
 
     const ul = document.createElement('ul');
     categories[category].forEach(article => {
@@ -45,8 +51,15 @@ for (const category in categories) {
         li.appendChild(link);
         ul.appendChild(li);
     });
-    categoryDiv.appendChild(ul);
+    categoryContent.appendChild(ul);
+    categoryDiv.appendChild(categoryContent);
     sidebar.appendChild(categoryDiv);
+
+    // Add click event for collapsing/expanding
+    categoryHeader.addEventListener('click', () => {
+        const isExpanded = categoryContent.classList.toggle('expanded');
+        categoryHeader.classList.toggle('expanded', isExpanded);
+    });
 }
 
 // Load article based on hash
