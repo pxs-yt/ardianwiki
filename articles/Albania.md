@@ -5722,6 +5722,8 @@ Nations](Category:Member_states_of_the_United_Nations "Category:Member states of
     {{Cite web |url=https://www.civilrightsdefenders.org/country-reports/human-rights-in-albania/ |title=Human Rights in Albania |access-date=2 November 2017 |archive-url=https://web.archive.org/web/20180114170645/http://www.civilrightsdefenders.org/country-reports/human-rights-in-albania/ |archive-date=14 January 2018 |url-status=dead }}
     ```
 
+[^441]:
+
 [^442]:
     ```{=mediawiki}
     {{cite web|title=Annual Review of the Human Rights Situation of Lesbian, Gay, Bisexual, Trans and Intersex People in Europe|url=http://www.ilga-europe.org/sites/default/files/Attachments/01_full_annual_review_updated.pdf|website=ilga-europe.org|publisher=ILGA-Europe|access-date=8 July 2015|date=2015}}
