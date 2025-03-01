@@ -15,6 +15,7 @@ const articles = [
     { title: "Solar System", category: "Space", file: "solar_system.md" },
     { title: "World War II", category: "War", file: "world_war_ii.md" },
     { title: "The Human Brain", category: "Biology", file: "the_human_brain.md" },
+    { title: "Albania", category: "Countries", file: "Albania.md" },
     
     
 ];
