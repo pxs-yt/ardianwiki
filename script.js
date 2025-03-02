@@ -58,7 +58,7 @@ renderer.image = function(href, title, text) {
     // Return a valid figure with fallback for missing data
     return `
         <figure>
-            <img src="${imageSrc}" alt="${imageAlt}" title="${imageTitle}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
+            <img src="${imageSrc}" alt="${imageAlt}" title="${imageTitle}" loading="lazy" onerror="this.onerror=null;">
             <figcaption>${imageTitle || imageAlt || 'Image'}</figcaption>
         </figure>
     `;
