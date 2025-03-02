@@ -46,22 +46,32 @@ const articles = [
     { title: "Microsoft", category: "Tech Companies", file: "Microsoft.md" },
 ];
 
-// Custom renderer for images with error handling and validation
+// Custom renderer for images with improved error handling and content preservation
 const renderer = new marked.Renderer();
+
+// Preserve other Markdown elements (e.g., headings, paragraphs) by default
+renderer.heading = function(text, level) {
+    return `<h${level}>${text}</h${level}>`;
+};
+renderer.paragraph = function(text) {
+    return `<p>${text}</p>`;
+};
+// ... Add other renderer methods as needed for full Markdown support
+
+// Handle images with robust error handling and fallback
 renderer.image = function(href, title, text) {
-    // Ensure href is a string and not an object or null
-    const imageSrc = typeof href === 'string' ? href.trim() : '';
+    // Ensure href is a valid string, default to placeholder if invalid
+    const imageSrc = typeof href === 'string' && href.trim() ? href.trim() : 'images/placeholder.jpg';
     // Ensure title and text are strings, defaulting to meaningful values
     const imageTitle = typeof title === 'string' ? title.trim() : '';
     const imageAlt = typeof text === 'string' ? text.trim() : 'Image';
 
-    // Validate and sanitize imageSrc to prevent [object Object] or empty strings
+    // Log warning for invalid sources (optional for debugging)
     if (!imageSrc || imageSrc === '[object Object]') {
         console.warn(`Invalid image source detected: ${href}. Using placeholder.`);
-        imageSrc = 'images/placeholder.jpg'; // Fallback if src is invalid
     }
 
-    // Return a valid figure with error handling and accessibility
+    // Return a valid figure with fallback for missing data and error handling
     return `
         <figure>
             <img src="${imageSrc}" alt="${imageAlt}" title="${imageTitle}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
@@ -69,7 +79,11 @@ renderer.image = function(href, title, text) {
         </figure>
     `;
 };
-marked.setOptions({ renderer });
+marked.setOptions({ 
+    renderer: renderer,
+    gfm: true, // Enable GitHub-flavored Markdown
+    breaks: true // Enable line breaks
+});
 
 // Populate sidebar with collapsible subcategories
 const sidebar = document.querySelector('.sidebar');
@@ -122,14 +136,26 @@ function loadArticle() {
     if (hash) {
         const article = articles.find(a => a.file.replace('.md', '') === hash);
         if (article) {
-            // Placeholder for fetching article content (assumes Markdown files in an 'articles' folder)
+            // Fetch and parse article content, handle errors explicitly
             fetch(`articles/${article.file}`)
-                .then(response => response.text())
-                .then(markdown => {
-                    document.getElementById('article-content').innerHTML = marked.parse(markdown);
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch ${article.file}: ${response.status}`);
+                    }
+                    return response.text();
                 })
-                .catch(() => {
-                    document.getElementById('article-content').innerHTML = `<h1>${article.title}</h1><p>${article.snippet || 'No description available.'}</p>`;
+                .then(markdown => {
+                    try {
+                        const html = marked.parse(markdown);
+                        document.getElementById('article-content').innerHTML = html;
+                    } catch (error) {
+                        console.error('Error parsing Markdown:', error);
+                        document.getElementById('article-content').innerHTML = `<h1>${article.title}</h1><p>Failed to load article content. Error: ${error.message}</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    document.getElementById('article-content').innerHTML = `<h1>${article.title}</h1><p>${article.snippet || 'No description available.'} (Error loading content: ${error.message})</p>`;
                 });
         }
     } else {
