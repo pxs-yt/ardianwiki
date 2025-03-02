@@ -46,7 +46,7 @@ const articles = [
     { title: "Microsoft", category: "Tech Companies", file: "Microsoft.md" },
 ];
 
-// Custom renderer for images (optional, for future content)
+// Custom renderer for images
 const renderer = new marked.Renderer();
 renderer.image = function(href, title, text) {
     return `<figure><img src="${href}" alt="${text}" title="${title}" loading="lazy"><figcaption>${title || text}</figcaption></figure>`;
@@ -141,7 +141,7 @@ function displaySearchResults(results) {
                 ${results.map(article => `
                     <div class="result">
                         <a href="#${article.file.replace('.md', '')}">${article.title}</a>
-                        <p>${article.snippet || 'undefined'}</p>
+                        <p>${article.snippet || 'No description available.'}</p>
                     </div>
                 `).join('')}
             </div>

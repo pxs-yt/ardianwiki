@@ -3,7 +3,7 @@
 
 /* Theme variables */
 :root {
-    /* Dark mode (default) - Image 1 */
+    /* Dark mode (default) */
     --bg-color: #1A1A1A;
     --text-color: #FFFFFF;
     --secondary-text-color: #808080;
@@ -15,7 +15,7 @@
     --sidebar-bg: #2D2D2D;
     --shadow-color: rgba(0, 0, 0, 0.2);
     --frost-bg: rgba(45, 45, 45, 0.8);
-    --link-color: #A77BFF; /* Purple for hyperlinks per Image 1 */
+    --link-color: #A77BFF; /* Purple hyperlinks */
     --figure-bg: #333;
     --figure-border: #555;
     --figcaption-color: #ccc;
@@ -34,14 +34,14 @@ body.light-mode {
     --sidebar-bg: #F0F0F0;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --frost-bg: rgba(255, 255, 255, 0.8);
-    --link-color: #0066CC; /* Blue for hyperlinks */
+    --link-color: #0066CC; /* Blue hyperlinks */
     --figure-bg: #fff;
     --figure-border: #ccc;
     --figcaption-color: #333;
 }
 
 body.paper-mode {
-    /* Paper mode - Image 2 */
+    /* Paper mode */
     --bg-color: #F5E8C7;
     --text-color: #4A2C2A;
     --secondary-text-color: #7A5D3A;
@@ -53,7 +53,7 @@ body.paper-mode {
     --sidebar-bg: #EADBA7;
     --shadow-color: rgba(74, 44, 42, 0.2);
     --frost-bg: rgba(234, 219, 167, 0.8);
-    --link-color: #0066CC; /* Blue for hyperlinks per Image 2 */
+    --link-color: #0066CC; /* Blue hyperlinks */
     --figure-bg: #EADBA7;
     --figure-border: #7A5D3A;
     --figcaption-color: #4A2C2A;
@@ -411,9 +411,5 @@ body.paper-mode #image-modal {
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;
-    }
-    .sidebar {
-        height: calc(100vh - 60px);
-        overflow-y: auto;
     }
 }
