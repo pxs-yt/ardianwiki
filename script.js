@@ -125,11 +125,17 @@ function loadArticle() {
     }
 }
 
-// Search functionality
+// Search functionality with special commands
 document.getElementById('search-input').addEventListener('input', () => {
     const query = document.getElementById('search-input').value.trim().toLowerCase();
-    const results = articles.filter(article => article.title.toLowerCase().includes(query));
-    displaySearchResults(results);
+    if (query === '*subcategories*') {
+        displaySubcategoryResults(false);
+    } else if (query === '*subcategories:articles*') {
+        displaySubcategoryResults(true);
+    } else {
+        const results = articles.filter(article => article.title.toLowerCase().includes(query));
+        displaySearchResults(results);
+    }
 });
 
 function displaySearchResults(results) {
@@ -150,6 +156,30 @@ function displaySearchResults(results) {
     } else {
         articleContent.innerHTML = '<p>No articles found.</p>';
     }
+}
+
+// New function to handle special commands
+function displaySubcategoryResults(includeArticles) {
+    const articleContent = document.getElementById('article-content');
+    const subcats = Object.keys(categories);
+    const html = `
+        <div class="subcategory-results">
+            <h2>${includeArticles ? 'Subcategories with Articles' : 'Subcategories'}</h2>
+            ${subcats.map(subcat => `
+                <div class="subcategory-item">
+                    <h3>${subcat}</h3>
+                    ${includeArticles ? `
+                        <ul>
+                            ${categories[subcat].map(article => `
+                                <li><a href="#${article.file.replace('.md', '')}">${article.title}</a></li>
+                            `).join('')}
+                        </ul>
+                    ` : ''}
+                </div>
+            `).join('')}
+        </div>
+    `;
+    articleContent.innerHTML = html;
 }
 
 // Toggle sidebar
