@@ -46,21 +46,27 @@ const articles = [
     { title: "Microsoft", category: "Tech Companies", file: "Microsoft.md" },
 ];
 
-// Custom renderer for images with improved error handling and content preservation
+// Custom renderer for Markdown with robust image handling
 const renderer = new marked.Renderer();
 
-// Preserve other Markdown elements (e.g., headings, paragraphs) by default
+// Default renderer for other Markdown elements to ensure all content renders
 renderer.heading = function(text, level) {
     return `<h${level}>${text}</h${level}>`;
 };
 renderer.paragraph = function(text) {
     return `<p>${text}</p>`;
 };
-// ... Add other renderer methods as needed for full Markdown support
+renderer.list = function(body, ordered, start) {
+    const tag = ordered ? 'ol' : 'ul';
+    return `<${tag}>${body}</${tag}>`;
+};
+renderer.listitem = function(text) {
+    return `<li>${text}</li>`;
+};
 
-// Handle images with robust error handling and fallback
+// Handle images with robust error handling, responsive design, and popovers
 renderer.image = function(href, title, text) {
-    // Ensure href is a valid string, default to placeholder if invalid
+    // Ensure href is a valid string URL, default to placeholder if invalid
     const imageSrc = typeof href === 'string' && href.trim() ? href.trim() : 'images/placeholder.jpg';
     // Ensure title and text are strings, defaulting to meaningful values
     const imageTitle = typeof title === 'string' ? title.trim() : '';
@@ -71,15 +77,15 @@ renderer.image = function(href, title, text) {
         console.warn(`Invalid image source detected: ${href}. Using placeholder.`);
     }
 
-    // Return a valid figure with fallback for missing data and error handling
+    // Return a valid figure with responsive styling, error handling, and data attributes for popovers
     return `
-        <figure>
+        <figure class="article-image" data-fullsrc="${imageSrc}" data-caption="${imageTitle || imageAlt}">
             <img src="${imageSrc}" alt="${imageAlt}" title="${imageTitle}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
             <figcaption>${imageTitle || imageAlt}</figcaption>
         </figure>
     `;
 };
-marked.setOptions({ 
+marked.setOptions({
     renderer: renderer,
     gfm: true, // Enable GitHub-flavored Markdown
     breaks: true // Enable line breaks
@@ -136,7 +142,6 @@ function loadArticle() {
     if (hash) {
         const article = articles.find(a => a.file.replace('.md', '') === hash);
         if (article) {
-            // Fetch and parse article content, handle errors explicitly
             fetch(`articles/${article.file}`)
                 .then(response => {
                     if (!response.ok) {
@@ -148,9 +153,11 @@ function loadArticle() {
                     try {
                         const html = marked.parse(markdown);
                         document.getElementById('article-content').innerHTML = html;
+                        // Reattach image click handlers after content updates
+                        setupImageClickHandlers();
                     } catch (error) {
                         console.error('Error parsing Markdown:', error);
-                        document.getElementById('article-content').innerHTML = `<h1>${article.title}</h1><p>Failed to load article content. Error: ${error.message}</p>`;
+                        document.getElementById('article-content').innerHTML = `<h1>${article.title}</h1><p>${article.snippet || 'No description available.'} (Error loading content: ${error.message})</p>`;
                     }
                 })
                 .catch(error => {
@@ -204,6 +211,8 @@ function displaySearchResults(results) {
     }
     // Ensure the modal is closed when searching
     document.getElementById('image-modal').style.display = 'none';
+    // Reattach image click handlers after content updates
+    setupImageClickHandlers();
 }
 
 // New function to handle special commands
@@ -230,6 +239,8 @@ function displaySubcategoryResults(includeArticles) {
     articleContent.innerHTML = html;
     // Ensure the modal is closed when displaying subcategories
     document.getElementById('image-modal').style.display = 'none';
+    // Reattach image click handlers after content updates
+    setupImageClickHandlers();
 }
 
 // Toggle sidebar
@@ -296,16 +307,27 @@ if (savedTheme === 'light-mode') {
     themeIcon.className = 'fas fa-sun';
 }
 
-// Image modal handling
-document.getElementById('article-content').addEventListener('click', (e) => {
-    if (e.target.tagName === 'IMG' && e.target.closest('figure')) {
-        const img = e.target;
-        const caption = img.nextElementSibling ? img.nextElementSibling.textContent : '';
-        document.getElementById('modal-image').src = img.src;
-        document.getElementById('modal-caption').textContent = caption;
-        document.getElementById('image-modal').style.display = 'flex';
-    }
-});
+// Image modal handling functions
+function setupImageClickHandlers() {
+    // Remove existing handlers to prevent duplicates
+    const images = document.querySelectorAll('.article-image img');
+    images.forEach(img => {
+        img.removeEventListener('click', handleImageClick);
+        img.addEventListener('click', handleImageClick);
+    });
+}
+
+function handleImageClick(e) {
+    const figure = e.target.closest('.article-image');
+    if (!figure) return;
+
+    const imageSrc = figure.dataset.fullsrc || figure.querySelector('img').src;
+    const caption = figure.dataset.caption || '';
+
+    document.getElementById('modal-image').src = imageSrc;
+    document.getElementById('modal-caption').textContent = caption;
+    document.getElementById('image-modal').style.display = 'flex';
+}
 
 document.querySelector('.close-modal').addEventListener('click', () => {
     document.getElementById('image-modal').style.display = 'none';
@@ -316,3 +338,6 @@ document.getElementById('image-modal').addEventListener('click', (e) => {
         document.getElementById('image-modal').style.display = 'none';
     }
 });
+
+// Ensure image handlers are set up on initial load
+setupImageClickHandlers();
