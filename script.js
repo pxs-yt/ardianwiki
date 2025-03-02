@@ -50,16 +50,22 @@ const articles = [
 const renderer = new marked.Renderer();
 renderer.image = function(href, title, text) {
     // Ensure href is a string and not an object or null
-    const imageSrc = typeof href === 'string' ? href : '';
-    // Ensure title and text are strings, defaulting to empty if undefined
-    const imageTitle = typeof title === 'string' ? title : '';
-    const imageAlt = typeof text === 'string' ? text : 'Image';
+    const imageSrc = typeof href === 'string' ? href.trim() : '';
+    // Ensure title and text are strings, defaulting to meaningful values
+    const imageTitle = typeof title === 'string' ? title.trim() : '';
+    const imageAlt = typeof text === 'string' ? text.trim() : 'Image';
 
-    // Return a valid figure with fallback for missing data
+    // Validate and sanitize imageSrc to prevent [object Object] or empty strings
+    if (!imageSrc || imageSrc === '[object Object]') {
+        console.warn(`Invalid image source detected: ${href}. Using placeholder.`);
+        imageSrc = 'images/placeholder.jpg'; // Fallback if src is invalid
+    }
+
+    // Return a valid figure with error handling and accessibility
     return `
         <figure>
-            <img src="${imageSrc}" alt="${imageAlt}" title="${imageTitle}" loading="lazy" onerror="this.onerror=null;">
-            <figcaption>${imageTitle || imageAlt || 'Image'}</figcaption>
+            <img src="${imageSrc}" alt="${imageAlt}" title="${imageTitle}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
+            <figcaption>${imageTitle || imageAlt}</figcaption>
         </figure>
     `;
 };

@@ -1,6 +1,6 @@
 # Tim Cook
 
-![Tim Cook](https://pxs-yt.github.io/ardianwiki/images/tim_cook/tim-cook.jpg "Tim Cook, CEO of Apple Inc.")
+![Tim Cook](images/tim_cook/tim-cook.jpg "Tim Cook, CEO of Apple Inc.")
 
 Timothy Donald Cook (born November 1, 1960)[1] is an American business executive who is the current chief executive officer of [Apple Inc.](https://en.wikipedia.org/wiki/Apple_Inc.) Cook had previously been the company's chief operating officer under its co-founder [Steve Jobs](https://pxs-yt.github.io/ardianwiki/#Steve_Jobs).[2] Cook joined Apple in March 1998 as a senior vice president for worldwide operations, and then as vice president for worldwide sales and operations.[3] He was appointed chief executive on August 24, 2011, after Jobs who had cancer, resigned and died later that year.[4]
 
