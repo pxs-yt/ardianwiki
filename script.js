@@ -46,10 +46,22 @@ const articles = [
     { title: "Microsoft", category: "Tech Companies", file: "Microsoft.md" },
 ];
 
-// Custom renderer for images
+// Custom renderer for images with error handling and validation
 const renderer = new marked.Renderer();
 renderer.image = function(href, title, text) {
-    return `<figure><img src="${href}" alt="${text}" title="${title}" loading="lazy"><figcaption>${title || text}</figcaption></figure>`;
+    // Ensure href is a string and not an object or null
+    const imageSrc = typeof href === 'string' ? href : '';
+    // Ensure title and text are strings, defaulting to empty if undefined
+    const imageTitle = typeof title === 'string' ? title : '';
+    const imageAlt = typeof text === 'string' ? text : 'Image';
+
+    // Return a valid figure with fallback for missing data
+    return `
+        <figure>
+            <img src="${imageSrc}" alt="${imageAlt}" title="${imageTitle}" loading="lazy" onerror="this.onerror=null; this.src='images/placeholder.jpg';">
+            <figcaption>${imageTitle || imageAlt || 'Image'}</figcaption>
+        </figure>
+    `;
 };
 marked.setOptions({ renderer });
 
@@ -111,7 +123,7 @@ function loadArticle() {
                     document.getElementById('article-content').innerHTML = marked.parse(markdown);
                 })
                 .catch(() => {
-                    document.getElementById('article-content').innerHTML = `<h1>${article.title}</h1><p>${article.snippet}</p>`;
+                    document.getElementById('article-content').innerHTML = `<h1>${article.title}</h1><p>${article.snippet || 'No description available.'}</p>`;
                 });
         }
     } else {
@@ -123,6 +135,8 @@ function loadArticle() {
             <div class="home-stats">Total Articles: ${totalArticles} | Total Subcategories: ${totalSubcategories}</div>
         `;
     }
+    // Ensure the modal is closed when navigating
+    document.getElementById('image-modal').style.display = 'none';
 }
 
 // Search functionality with special commands
@@ -156,6 +170,8 @@ function displaySearchResults(results) {
     } else {
         articleContent.innerHTML = '<p>No articles found.</p>';
     }
+    // Ensure the modal is closed when searching
+    document.getElementById('image-modal').style.display = 'none';
 }
 
 // New function to handle special commands
@@ -180,6 +196,8 @@ function displaySubcategoryResults(includeArticles) {
         </div>
     `;
     articleContent.innerHTML = html;
+    // Ensure the modal is closed when displaying subcategories
+    document.getElementById('image-modal').style.display = 'none';
 }
 
 // Toggle sidebar
