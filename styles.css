@@ -1,6 +1,9 @@
+/* Import Poppins font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+/* Theme variables */
 :root {
+    /* Dark mode (default) - Image 1 */
     --bg-color: #1A1A1A;
     --text-color: #FFFFFF;
     --secondary-text-color: #808080;
@@ -12,10 +15,14 @@
     --sidebar-bg: #2D2D2D;
     --shadow-color: rgba(0, 0, 0, 0.2);
     --frost-bg: rgba(45, 45, 45, 0.8);
-    --link-color: #FFFFFF;
+    --link-color: #A77BFF; /* Purple for hyperlinks per Image 1 */
+    --figure-bg: #333;
+    --figure-border: #555;
+    --figcaption-color: #ccc;
 }
 
 body.light-mode {
+    /* Light mode */
     --bg-color: #FAFAFA;
     --text-color: #333333;
     --secondary-text-color: #666666;
@@ -27,31 +34,39 @@ body.light-mode {
     --sidebar-bg: #F0F0F0;
     --shadow-color: rgba(0, 0, 0, 0.1);
     --frost-bg: rgba(255, 255, 255, 0.8);
-    --link-color: #333333;
+    --link-color: #0066CC; /* Blue for hyperlinks */
+    --figure-bg: #fff;
+    --figure-border: #ccc;
+    --figcaption-color: #333;
 }
 
 body.paper-mode {
-    --bg-color: #F5E8C7; /* Light brown paper-like background */
-    --text-color: #4A2C2A; /* Dark brown text for contrast */
-    --secondary-text-color: #7A5D3A; /* Muted brown for secondary text */
-    --card-bg: #EADBA7; /* Slightly darker paper tone for cards */
-    --card-hover-bg: #D9C79F; /* Even darker on hover */
-    --header-bg: #EADBA7; /* Paper-like header */
-    --input-bg: #EADBA7; /* Paper-like input */
-    --input-border: #7A5D3A; /* Brown border */
-    --sidebar-bg: #EADBA7; /* Paper-like sidebar */
-    --shadow-color: rgba(74, 44, 42, 0.2); /* Subtle brown shadow */
-    --frost-bg: rgba(234, 219, 167, 0.8); /* Paper-like frost effect */
-    --link-color: #4A2C2A; /* Dark brown links */
+    /* Paper mode - Image 2 */
+    --bg-color: #F5E8C7;
+    --text-color: #4A2C2A;
+    --secondary-text-color: #7A5D3A;
+    --card-bg: #EADBA7;
+    --card-hover-bg: #D9C79F;
+    --header-bg: #EADBA7;
+    --input-bg: #EADBA7;
+    --input-border: #7A5D3A;
+    --sidebar-bg: #EADBA7;
+    --shadow-color: rgba(74, 44, 42, 0.2);
+    --frost-bg: rgba(234, 219, 167, 0.8);
+    --link-color: #0066CC; /* Blue for hyperlinks per Image 2 */
+    --figure-bg: #EADBA7;
+    --figure-border: #7A5D3A;
+    --figcaption-color: #4A2C2A;
 }
 
+/* General styles */
 body {
     font-family: 'Poppins', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    transition: all 0.3s ease; /* Smooth transition for theme changes */
+    transition: all 0.3s ease;
 }
 
 header {
@@ -59,7 +74,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 10px; /* Reduced padding for mobile */
+    padding: 8px 10px;
     position: fixed;
     top: 0;
     width: 100%;
@@ -74,33 +89,33 @@ header {
 }
 
 .logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
-    font-size: 18px; /* Reduced icon size for mobile */
-    margin-right: 5px; /* Reduced margin for mobile */
+    font-size: 18px;
+    margin-right: 5px;
     color: var(--text-color);
 }
 
 .wiki-title {
-    font-size: 1.2em; /* Reduced font size for mobile */
+    font-size: 1.2em;
     font-weight: 600;
     color: var(--text-color);
     text-decoration: none;
 }
 
 #search-input {
-    padding: 6px; /* Reduced padding for mobile */
+    padding: 6px;
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
-    border-radius: 12px; /* Squircle corners */
+    border-radius: 12px;
     color: var(--text-color);
-    font-size: 12px; /* Reduced font size for mobile */
-    width: 120px; /* Reduced width for mobile */
+    font-size: 12px;
+    width: 120px;
     transition: width 0.3s ease, border-color 0.3s ease;
 }
 
 #search-input:focus {
-    width: 150px; /* Reduced focus width for mobile */
+    width: 150px;
     outline: none;
-    border-color: var(--primary-color, #5DADE2); /* Optional highlight color */
+    border-color: var(--link-color);
 }
 
 .hamburger, .close-sidebar, .theme-toggle {
@@ -119,20 +134,20 @@ header {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -100%; /* Hidden off-screen by default on all screen sizes */
+    left: -100%;
     width: 250px;
     height: 100%;
     background-color: var(--sidebar-bg);
     padding: 15px;
     transition: left 0.3s ease;
     z-index: 1000;
-    backdrop-filter: blur(10px); /* Frost effect */
-    background: var(--frost-bg); /* Frost effect fallback */
-    overflow-y: auto; /* Enable vertical scrolling for article list */
+    backdrop-filter: blur(10px);
+    background: var(--frost-bg);
+    overflow-y: auto;
 }
 
 .sidebar.open {
-    left: 0; /* Slides in when 'open' class is added */
+    left: 0;
 }
 
 .close-sidebar {
@@ -147,9 +162,8 @@ header {
     color: var(--text-color);
 }
 
-/* Collapsible Subcategories in Sidebar */
 .sidebar .category {
-    margin-bottom: 4px; /* Reduced from 8px to bring categories closer */
+    margin-bottom: 4px;
 }
 
 .sidebar .category-header {
@@ -158,7 +172,7 @@ header {
     align-items: center;
     font-size: 16px;
     font-weight: 600;
-    margin: 0 0 2px; /* Reduced from 4px for closer spacing */
+    margin: 0 0 2px;
     color: var(--text-color);
     cursor: pointer;
     padding: 5px 0;
@@ -170,7 +184,7 @@ header {
 }
 
 .sidebar .category-header.expanded i {
-    transform: rotate(180deg); /* Point down when expanded */
+    transform: rotate(180deg);
 }
 
 .sidebar .category-content {
@@ -180,7 +194,7 @@ header {
 }
 
 .sidebar .category-content.expanded {
-    max-height: 200px; /* Adjust based on content height */
+    max-height: 200px;
 }
 
 .sidebar .category ul {
@@ -202,7 +216,6 @@ header {
 
 .sidebar .category a:hover {
     text-decoration: underline;
-    color: var(--primary-color, #5DADE2);
 }
 
 .main-content {
@@ -226,9 +239,9 @@ header {
 .home-stats {
     margin-top: 15px;
     padding: 15px;
-    background: var(--frost-bg); /* Frost effect */
-    backdrop-filter: blur(10px); /* Frost effect */
-    border-radius: 12px; /* Squircle corners */
+    background: var(--frost-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
     box-shadow: 0 4px 10px var(--shadow-color);
     color: var(--text-color);
     font-size: 16px;
@@ -248,12 +261,12 @@ header {
 }
 
 .search-results .result {
-    background: var(--frost-bg); /* Frost effect */
-    backdrop-filter: blur(10px); /* Frost effect */
-    border-radius: 12px; /* Squircle corners */
+    background: var(--frost-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
     padding: 20px;
     margin-bottom: 15px;
-    box-shadow: 0 8px 20px var(--shadow-color); /* Enhanced drop shadow */
+    box-shadow: 0 8px 20px var(--shadow-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -263,7 +276,7 @@ header {
 }
 
 .search-results .result a {
-    color: var(--text-color);
+    color: var(--link-color);
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
@@ -278,109 +291,93 @@ header {
     line-height: 1.5;
 }
 
-/* Subcategory Search Results Styling */
-.subcategory-results {
-    margin-top: 20px;
-    padding: 0 20px;
+/* Modal styling */
+#image-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
 }
 
-.subcategory-results h2 {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 15px;
+body.light-mode #image-modal {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+body.paper-mode #image-modal {
+    background: rgba(234, 219, 167, 0.8);
+}
+
+.modal-content {
+    position: relative;
+    text-align: center;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+#modal-image {
+    max-width: 90vw;
+    max-height: 80vh;
+    border: 1px solid var(--figure-border);
+}
+
+#modal-caption {
     color: var(--text-color);
-}
-
-.subcategory-results .category-item {
-    background: var(--frost-bg); /* Frost effect */
-    backdrop-filter: blur(10px); /* Frost effect */
-    border-radius: 12px; /* Squircle corners */
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 8px 20px var(--shadow-color); /* Enhanced drop shadow */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.subcategory-results .category-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px var(--shadow-color);
-}
-
-.subcategory-results .category-item h3 {
-    color: var(--text-color);
-    font-size: 18px;
-    font-weight: bold;
-    margin: 0 0 10px;
-    text-decoration: none;
-}
-
-.subcategory-results .category-item ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.subcategory-results .category-item li {
-    margin-bottom: 8px;
-}
-
-.subcategory-results .category-item a {
-    color: var(--link-color);
-    text-decoration: none;
+    margin-top: 10px;
     font-size: 16px;
-    display: block;
 }
 
-.subcategory-results .category-item a:hover {
-    text-decoration: underline;
-    color: var(--primary-color, #5DADE2);
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    color: var(--text-color);
+    cursor: pointer;
 }
 
 /* Responsive adjustments for mobile */
 @media (max-width: 767px) {
-    .search-results, .subcategory-results {
+    header {
+        padding: 6px 8px;
+    }
+    .logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
+        font-size: 16px;
+        margin-right: 3px;
+    }
+    .wiki-title {
+        font-size: 1em;
+    }
+    #search-input {
+        padding: 4px;
+        width: 100px;
+    }
+    #search-input:focus {
+        width: 120px;
+    }
+    .search-results {
         padding: 0 10px;
     }
-
-    .search-results .result, .subcategory-results .category-item {
+    .search-results .result {
         padding: 12px;
         margin-bottom: 10px;
     }
-
-    .search-results .result a, .subcategory-results .category-item h3 {
+    .search-results .result a {
         font-size: 18px;
     }
-
-    .search-results .result p, .subcategory-results .category-item a {
+    .search-results .result p {
         font-size: 14px;
     }
-
     .home-stats {
         padding: 12px;
         font-size: 14px;
-    }
-
-    /* Mobile-specific header adjustments */
-    header {
-        padding: 6px 8px; /* Further reduced padding */
-    }
-
-    .logo, .profile-icon, .search-icon, .hamburger i, .close-sidebar i, .theme-toggle i {
-        font-size: 16px; /* Further reduced icon size */
-        margin-right: 3px; /* Further reduced margin */
-    }
-
-    .wiki-title {
-        font-size: 1em; /* Further reduced font size */
-    }
-
-    #search-input {
-        padding: 4px; /* Further reduced padding */
-        width: 100px; /* Further reduced width */
-    }
-
-    #search-input:focus {
-        width: 120px; /* Further reduced focus width */
     }
 }
 
@@ -389,47 +386,34 @@ header {
     .container {
         flex-direction: row;
     }
-
     header {
         padding: 10px 20px;
     }
-
     .main-content {
-        margin-left: 0; /* No default margin since sidebar is hidden */
+        margin-left: 0;
         padding: 30px;
     }
-
     #article-content h1 {
         font-size: 32px;
     }
-
     #article-content p {
         font-size: 18px;
     }
-
-    .hamburger {
-        display: block; /* Show hamburger on desktop too */
-    }
-
-    .search-results, .subcategory-results {
+    .search-results {
         padding: 0 30px;
     }
-
-    .search-results .result, .subcategory-results .category-item {
+    .search-results .result {
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;
     }
-
     .home-stats {
         max-width: 500px;
         margin-left: auto;
         margin-right: auto;
     }
-
-    /* Ensure sidebar is scrollable on desktop too */
     .sidebar {
-        height: calc(100vh - 60px); /* Adjust for header height */
-        overflow-y: auto; /* Enable scrolling on desktop */
+        height: calc(100vh - 60px);
+        overflow-y: auto;
     }
 }
